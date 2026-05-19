@@ -12,9 +12,17 @@ const db = mysql.createConnection({
     port: process.env.MYSQLPORT || process.env.MYSQL_PORT || process.env.DATABASE_PORT || 3306
 })
 
+console.log('Attempting to connect to database at:', {
+    host: process.env.MYSQLHOST || process.env.MYSQL_HOST || process.env.DATABASE_HOST,
+    user: process.env.MYSQLUSER || process.env.MYSQL_USER || process.env.DATABASE_USER,
+    database: process.env.MYSQLDATABASE || process.env.MYSQL_DATABASE || process.env.DATABASE,
+    port: process.env.MYSQLPORT || process.env.MYSQL_PORT || process.env.DATABASE_PORT || 3306
+});
+
 db.connect(function (err) {
     if (err) {
-        throw err;
+        console.error('Database connection failed:', err.message);
+        // Không throw err để tránh app crash liên tục
     } else {
         console.log('You are already connected to the database')
     }
