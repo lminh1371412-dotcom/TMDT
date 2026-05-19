@@ -17,10 +17,14 @@ menuItem.forEach(item => {
 })
 
 // for menu__item localStorge
-const url = location.pathname + location.search;
-if (url != '/search/results?hotProduct=true'
-    && url != '/search/results?discount=true'
-    && url != '/about-us') {
+const currentUrl = location.pathname + location.search
+const excludedUrls = [
+    '/search/results?hotProduct=true',
+    '/search/results?discount=true',
+    '/about-us'
+]
+
+if (!excludedUrls.includes(currentUrl)) {
     if (activeMenuItem) {
         let activeItem = document.querySelector(`.${activeMenuItem.replaceAll(' ', '.')}`)
         activeItem.classList.remove('active-menu-item')
