@@ -42,6 +42,6 @@ app.use(
 // route init
 route(app);
 
-app.listen(cfg.port, () => {
+app.listen(cfg.port, cfg.host, () => {
   console.log(`Website is running at http://${cfg.host}:${cfg.port}`);
 });
