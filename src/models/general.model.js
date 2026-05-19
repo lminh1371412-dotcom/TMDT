@@ -97,7 +97,8 @@ general.toHHMM = function (datetime) {
 }
 
 general.toCurrency = function (money) {
-    let currency = money.toFixed(0).replace(/./g, function (c, i, a) {
+    if (money === null || money === undefined) money = 0;
+    let currency = Number(money).toFixed(0).replace(/./g, function (c, i, a) {
         return i > 0 && c !== "," && (a.length - i) % 3 === 0 ? "." + c : c;
     });
     return currency + 'đ';
