@@ -1,0 +1,36 @@
+<% if (pagination.totalPage != 1) { %>
+<%
+  function getPaginationLink(pageNum) {
+    let link = `?page=${pageNum}`;
+    if (pagination.searchKey) link += `&searchKey=${encodeURIComponent(pagination.searchKey)}`;
+    if (pagination.category_id) link += `&category_id=${pagination.category_id}`;
+    if (pagination.minPrice) link += `&minPrice=${pagination.minPrice}`;
+    if (pagination.maxPrice) link += `&maxPrice=${pagination.maxPrice}`;
+    if (pagination.sort) link += `&sort=${pagination.sort}`;
+    return link;
+  }
+%>
+<div class="pagination">
+
+	<div class="pagination-container">
+		<% if (pagination.page != 1) { %>
+		<a href="<%= getPaginationLink(pagination.page > 2 ? pagination.page - 1 : 1) %>">
+			<span class="material-symbols-rounded"> chevron_left </span>
+		</a>
+		<% } %>
+
+		<% for (i = 1; i <= pagination.totalPage; i++) { %>
+		<a href="<%= getPaginationLink(i) %>" class="<%= pagination.page == i ? 'active' : '' %>">
+			<%= i %>
+		</a>
+		<% } %>
+
+		<% if (pagination.page != pagination.totalPage) { %>
+		<a href="<%= getPaginationLink(pagination.page < pagination.totalPage ? pagination.page + 1 : pagination.totalPage) %>">
+			<span class="material-symbols-rounded"> chevron_right </span>
+		</a>
+		<% } %>
+	</div>
+
+</div>
+<% } %>
