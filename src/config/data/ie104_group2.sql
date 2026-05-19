@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 22, 2026 lúc 08:07 AM
+-- Thời gian đã tạo: Th5 19, 2026 lúc 09:44 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -82,7 +82,22 @@ INSERT INTO `carts` (`customer_id`, `product_variant_id`, `cart_quantity`, `cart
 (8, 24, 3, '2023-11-26 19:45:13'),
 (10, 11, 5, '2023-11-26 19:45:13'),
 (10, 28, 1, '2023-11-26 19:45:13'),
-(13, 34, 1, '2023-12-15 14:16:52');
+(13, 34, 1, '2023-12-15 14:16:52'),
+(14, 27, 1, '2026-04-22 15:20:55'),
+(14, 38, 1, '2026-04-22 14:45:30'),
+(14, 58, 1, '2026-04-22 14:56:24'),
+(14, 66, 1, '2026-04-22 15:21:03'),
+(18, 51, 1, '2026-04-22 13:41:05'),
+(19, 44, 1, '2026-04-22 13:49:04'),
+(20, 52, 1, '2026-04-22 13:51:56'),
+(21, 42, 2, '2026-04-22 14:04:16'),
+(21, 52, 1, '2026-04-22 14:14:05'),
+(21, 62, 2, '2026-04-22 14:10:39'),
+(22, 37, 1, '2026-04-22 14:17:23'),
+(23, 37, 1, '2026-04-22 14:29:50'),
+(24, 11, 1, '2026-04-22 14:41:03'),
+(24, 19, 1, '2026-04-22 14:39:04'),
+(24, 67, 1, '2026-04-22 14:37:22');
 
 -- --------------------------------------------------------
 
@@ -95,7 +110,7 @@ CREATE TABLE `categories` (
   `category_name` varchar(100) NOT NULL,
   `category_img` varchar(100) NOT NULL,
   `categorry_type` varchar(50) NOT NULL DEFAULT 'Điện máy',
-  `category_added_date` date NOT NULL DEFAULT current_timestamp(),
+  `category_added_date` datetime NOT NULL DEFAULT current_timestamp(),
   `category_is_display` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
@@ -146,7 +161,16 @@ INSERT INTO `customers` (`customer_id`, `user_id`) VALUES
 (13, 33),
 (14, 34),
 (15, 35),
-(17, 37);
+(17, 37),
+(18, 38),
+(19, 39),
+(20, 40),
+(21, 41),
+(22, 42),
+(23, 43),
+(24, 44),
+(25, 45),
+(26, 46);
 
 -- --------------------------------------------------------
 
@@ -158,8 +182,8 @@ CREATE TABLE `discounts` (
   `discount_id` int(11) NOT NULL,
   `discount_name` varchar(100) NOT NULL,
   `discount_description` text DEFAULT NULL,
-  `discount_start_date` date NOT NULL DEFAULT current_timestamp(),
-  `discount_end_date` date NOT NULL DEFAULT current_timestamp(),
+  `discount_start_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `discount_end_date` datetime NOT NULL DEFAULT current_timestamp(),
   `discount_amount` float NOT NULL,
   `discount_is_display` tinyint(1) NOT NULL DEFAULT 1,
   `discount_img` varchar(100) DEFAULT NULL
@@ -181,7 +205,7 @@ INSERT INTO `discounts` (`discount_id`, `discount_name`, `discount_description`,
 (9, '10/10', 'Chương trình giảm giá ngày đôi 10/10', '2026-10-01', '2026-12-31', 12, 1, ''),
 (10, '11/11', 'Chương trình giảm giá ngày đôi 11/11', '2026-11-01', '2026-12-31', 10, 1, ''),
 (11, '12/12', 'Chương trình giảm giá ngày đôi 12/12', '2026-11-30', '2026-12-13', 12, 1, ''),
-(12, '1/11', 'Chương trình giảm giá ngày đôi 1/1', '2026-12-24', '2025-12-30', 20, 1, '');
+(12, '1/11', 'Chương trình giảm giá ngày đôi 1/1', '2026-10-29', '2025-12-28', 1, 1, '');
 
 -- --------------------------------------------------------
 
@@ -194,10 +218,9 @@ CREATE TABLE `feedbacks` (
   `product_variant_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
-  `feedback_date` date NOT NULL DEFAULT current_timestamp(),
+  `feedback_date` datetime NOT NULL DEFAULT current_timestamp(),
   `feedback_rate` int(11) NOT NULL DEFAULT 5,
-  `feedback_content` text DEFAULT 'Bạn chưa để lại lời nhận xét nào',
-  `feedback_img` varchar(255) DEFAULT NULL,
+  `feedback_content` varchar(500) NOT NULL DEFAULT 'Bạn chưa để lại lời nhận xét nào',
   `feedback_is_display` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
@@ -438,8 +461,8 @@ CREATE TABLE `home_sections` (
 --
 
 INSERT INTO `home_sections` (`id`, `section_key`, `display_order`) VALUES
-(1, 'Gợi ý hôm nay', 1),
-(2, 'Hàng mới về', 2),
+(1, 'Gợi ý hôm nay', 2),
+(2, 'Hàng mới về', 1),
 (3, 'Khuyến mãi', 3);
 
 -- --------------------------------------------------------
@@ -454,7 +477,7 @@ CREATE TABLE `notifications` (
   `notification_title` varchar(100) NOT NULL,
   `notification_subtitle` text DEFAULT NULL,
   `notification_content` text NOT NULL,
-  `notification_date` date NOT NULL DEFAULT current_timestamp(),
+  `notification_date` datetime NOT NULL DEFAULT current_timestamp(),
   `notification_is_display` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
@@ -507,7 +530,7 @@ CREATE TABLE `orders` (
   `staff_id` int(11) NOT NULL DEFAULT 1,
   `order_name` varchar(100) NOT NULL,
   `order_phone` varchar(10) NOT NULL,
-  `order_date` date NOT NULL DEFAULT current_timestamp(),
+  `order_date` datetime NOT NULL DEFAULT current_timestamp(),
   `order_delivery_date` date NOT NULL,
   `order_delivery_address` varchar(100) NOT NULL,
   `order_note` text NOT NULL,
@@ -559,7 +582,22 @@ INSERT INTO `orders` (`order_id`, `customer_id`, `staff_id`, `order_name`, `orde
 (80, 14, 1, 'Lê Văn Minh', '0987345654', '2026-04-19', '0000-00-00', 'w Nguyễn Trãi Hà Đông Hà Nội', '', NULL, 0, 2, '0000-00-00', 0, 'Chờ thanh toán'),
 (81, 14, 1, 'Lê Văn Minh', '0987345654', '2026-04-19', '0000-00-00', 'w Nguyễn Trãi Hà Đông Hà Nội', '', NULL, 0, 2, '0000-00-00', 0, 'Chờ thanh toán'),
 (82, 14, 1, 'Lê Văn Minh', '0987345654', '2026-04-21', '0000-00-00', 'w Nguyễn Trãi Hà Đông Hà Nội', '', NULL, 0, 2, '0000-00-00', 0, 'Chờ thanh toán'),
-(83, 14, 1, 'Lê Văn Minh', '0987345654', '2026-04-22', '0000-00-00', 'w Phường 8 Quận 3 Hà Nội', '', NULL, 0, 2, '0000-00-00', 0, 'Đang giao hàng');
+(83, 14, 1, 'Lê Văn Minh', '0987345654', '2026-04-22', '0000-00-00', 'w Phường 8 Quận 3 Hà Nội', '', NULL, 0, 2, '0000-00-00', 0, 'Đang giao hàng'),
+(84, 14, 1, 'Lê Văn Minh', '0987345654', '2026-04-22', '0000-00-00', 'w Nguyễn Trãi Hà Đông Hà Nội', '', NULL, 0, 2, '0000-00-00', 0, 'Chờ thanh toán'),
+(85, 14, 1, 'Lê Văn Minh', '0987345654', '2026-04-22', '0000-00-00', 'w Nguyễn Trãi Hà Đông Hà Nội', '', NULL, 0, 2, '0000-00-00', 0, 'Chờ thanh toán'),
+(86, 14, 1, 'Lê Văn Minh', '0987345654', '2026-04-22', '0000-00-00', 'w Nguyễn Trãi Quận 3 Hà Nội', '', NULL, 0, 2, '0000-00-00', 0, 'Chờ thanh toán'),
+(87, 14, 1, 'Lê Văn Minh', '0987345654', '2026-04-22', '0000-00-00', 'w Nguyễn Trãi Hà Đông Hà Nội', '', 150000, 123000, 2, '0000-00-00', 0, 'Chờ thanh toán'),
+(88, 14, 1, 'Lê Văn Minh', '0987345654', '2026-04-22', '0000-00-00', 'w Nguyễn Trãi Hà Đông Hà Nội', '', 150000, 150000, 2, '0000-00-00', 0, 'Chờ thanh toán'),
+(89, 14, 1, 'Lê Văn Minh', '0987345654', '2026-04-22', '0000-00-00', 'w Nguyễn Trãi Hà Đông Hà Nội', '', 40000, 40000, 2, '0000-00-00', 0, 'Chờ thanh toán'),
+(90, 14, 1, 'Lê Văn Minh', '0987345654', '2026-04-22', '0000-00-00', 'w Nguyễn Trãi Hà Đông Hà Nội', '', NULL, 0, 1, '0000-00-00', 1, 'Đang giao hàng'),
+(91, 14, 1, 'Lê Văn Minh', '0987345654', '2026-04-22', '0000-00-00', 'abc Nguyễn Trãi Hà Đông Hà Nội', '', 40000, 40000, 2, '0000-00-00', 0, 'Chờ thanh toán'),
+(92, 25, 1, 'abc', '0987786678', '2026-05-11', '0000-00-00', 'w Phường 25 Quận 5 Vũng Tàu', '', 11000, 11000, 2, '0000-00-00', 0, 'Chờ thanh toán'),
+(93, 25, 1, 'abc', '0987786678', '2026-05-11', '0000-00-00', 'w Phường 7 Quận 1 Vũng Tàu', '', NULL, 0, 2, '0000-00-00', 0, 'Chờ thanh toán'),
+(94, 26, 1, 'van dung', '0987123789', '2026-05-11', '0000-00-00', 'w Phường 7 Quận 6 Hồ Chí Minh', '', NULL, 0, 1, '0000-00-00', 1, 'Đang giao hàng'),
+(95, 26, 1, 'van dung', '0987123789', '2026-05-11', '0000-00-00', 'w Nguyễn Trãi Hà Đông Hà Nội', '', 11000, 11000, 2, '0000-00-00', 0, 'Chờ thanh toán'),
+(96, 14, 1, 'Lê Văn Minh', '0987345654', '2026-05-13', '0000-00-00', 'w Phường Bình Khánh Quận 2 Hồ Chí Minh', '', NULL, 0, 2, '0000-00-00', 0, 'Chờ thanh toán'),
+(97, 14, 1, 'Lê Văn Minh', '0987345654', '2026-05-13', '0000-00-00', 'w Phường Bình Khánh Quận 2 Hồ Chí Minh', '', NULL, 0, 2, '0000-00-00', 0, 'Chờ thanh toán'),
+(98, 14, 1, 'Lê Văn Minh', '0987345654', '2026-05-13', '0000-00-00', 'w Phường Bình An Quận 2 Hồ Chí Minh', '', NULL, 0, 2, '0000-00-00', 0, 'Chờ thanh toán');
 
 -- --------------------------------------------------------
 
@@ -624,7 +662,28 @@ INSERT INTO `order_details` (`order_id`, `product_variant_id`, `order_detail_qua
 (80, 63, 1, 40000, 40000),
 (81, 13, 2, 100000, 100000),
 (82, 63, 1, 40000, 40000),
-(83, 63, 1, 40000, 40000);
+(83, 63, 1, 40000, 40000),
+(84, 52, 1, 50000, 50000),
+(85, 63, 1, 40000, 40000),
+(86, 63, 1, 40000, 40000),
+(87, 38, 1, 150000, 123000),
+(87, 63, 1, 40000, 40000),
+(88, 17, 1, 410000, 410000),
+(88, 27, 3, 50000, 50000),
+(89, 34, 1, 12000, 12000),
+(89, 63, 1, 40000, 40000),
+(90, 37, 1, 10000, 10000),
+(91, 63, 1, 40000, 40000),
+(91, 64, 1, 50000, 50000),
+(92, 27, 3, 50000, 50000),
+(92, 47, 1, 11000, 11000),
+(93, 37, 1, 10000, 10000),
+(94, 58, 1, 50000, 50000),
+(95, 27, 2, 50000, 50000),
+(95, 47, 1, 11000, 11000),
+(96, 9, 1, 5000, 5000),
+(97, 9, 1, 5000, 5000),
+(98, 71, 1, 30000, 30000);
 
 --
 -- Bẫy `order_details`
@@ -1508,7 +1567,7 @@ CREATE TABLE `product_variants` (
   `product_variant_available` int(11) NOT NULL,
   `product_variant_is_stock` tinyint(1) DEFAULT NULL,
   `product_variant_is_bestseller` tinyint(1) DEFAULT NULL,
-  `product_variant_added_date` date NOT NULL DEFAULT current_timestamp(),
+  `product_variant_added_date` datetime NOT NULL DEFAULT current_timestamp(),
   `product_variant_is_display` tinyint(1) NOT NULL DEFAULT 1,
   `unit` varchar(50) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
@@ -1587,7 +1646,7 @@ CREATE TABLE `staffs` (
   `user_id` int(11) NOT NULL,
   `staff_role` varchar(100) NOT NULL,
   `staff_description` text DEFAULT NULL,
-  `staff_added_date` date NOT NULL DEFAULT current_timestamp()
+  `staff_added_date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
@@ -1679,7 +1738,7 @@ CREATE TABLE `users` (
   `user_email` varchar(100) DEFAULT NULL,
   `user_phone` char(10) NOT NULL,
   `user_address` varchar(255) DEFAULT NULL,
-  `user_register_date` date NOT NULL DEFAULT current_timestamp(),
+  `user_register_date` datetime NOT NULL DEFAULT current_timestamp(),
   `user_active` tinyint(1) NOT NULL DEFAULT 1,
   `user_status` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
@@ -1709,7 +1768,16 @@ INSERT INTO `users` (`user_id`, `user_login_name`, `user_password`, `user_name`,
 (33, '0887654321', '$2a$08$EX.tL8w9RDCIXlHXR8/yIuzFkaUFqPDiNuE7vZJCNxzD5u1f5KzcK', 'Nguyễn Linh Phương', NULL, '1999-03-03', 'Nữ', 'linhphuong@gmail.com', '0887654321', 'Hà Nội', '2023-12-15', 1, 1),
 (34, '0987345654', '$2a$08$F/uleYn4DBgKcH5IngVO6eeTLT7axfVSCFivAwjKwlFq2Jny9TfBW', 'Lê Văn Minh', NULL, '2004-07-13', 'Nam', 'minhlv@gmail.com', '0987345654', 'Hà Nội', '2026-04-07', 1, 1),
 (35, '0999777555', '$2a$08$JNKSzto/dDCAS4ali0hlJuso2I2yQEK6WwYJYKMu/oCfODfcrBhUe', 'Minh Lê Văn', NULL, '2016-04-13', 'Nam', 'lminh1371412@gmail.com', '0999777555', 'Hà Nội', '2026-04-15', 1, 0),
-(37, '0987789987', '$2a$08$T39pvknm1bfjmTnSZ.zSA.6Oievhzf6s4Gskg3ciZFj3jaAW3EeuK', 'Nguyễn Văn Mạnh ', NULL, '2026-04-10', 'Nam', 'lminh@gmail.com', '0987789987', 'Hà Nội', '2026-04-21', 1, 1);
+(37, '0987789987', '$2a$08$T39pvknm1bfjmTnSZ.zSA.6Oievhzf6s4Gskg3ciZFj3jaAW3EeuK', 'Nguyễn Văn Mạnh ', NULL, '2026-04-10', 'Nam', 'lminh@gmail.com', '0987789987', 'Hà Nội', '2026-04-21', 1, 1),
+(38, '0999999991', '$2a$08$AW3foKyNDrV8kiLLL5wy6ub1l5dLs53fmRBH47i5iBUblNiOqk4U.', 'dung', NULL, NULL, NULL, NULL, '0999999991', NULL, '2026-04-22', 1, 1),
+(39, '0999555666', '$2a$08$A2TOsCHQmVOosZzDnyldmOAPqRfdI59WGypGTsOBEXsaV8WyHoe/C', 'minh', NULL, NULL, NULL, NULL, '0999555666', NULL, '2026-04-22', 1, 1),
+(40, '0987654199', '$2a$08$wkeOyJEWbR6ALTiJZynXD.tJy2USpTU7x2n5Hk6Ep6QEQYFarVocG', 'lê van', NULL, NULL, NULL, NULL, '0987654199', NULL, '2026-04-22', 1, 1),
+(41, '0985567765', '$2a$08$BC43XpmZGj.rcbyGPKMxUeRjTZmSHxdtATu0Fr/4eaHIK5sLMx6RC', 'văn minh', NULL, NULL, NULL, NULL, '0985567765', NULL, '2026-04-22', 1, 1),
+(42, '0987134432', '$2a$08$bAxme0ZE6qpSSMmEq..gt.U1l8x35ODZ07FWDqUmYKYSD.cylFHCu', 'minh', NULL, NULL, NULL, NULL, '0987134432', NULL, '2026-04-22', 1, 1),
+(43, '0987789980', '$2a$08$lW3KI84sR9xhSKlMd5Ql5.JzErCyIiarl7Kq9PW7UKD4Izw9GA2V6', 'minh', NULL, NULL, NULL, NULL, '0987789980', NULL, '2026-04-22', 1, 1),
+(44, '0987454454', '$2a$08$7iRBnxWgtY1K/HOnpKSoCeC.sZpeWi0FHbZtRC8aQqQoTxGoUMo0G', 'minh', NULL, NULL, NULL, NULL, '0987454454', NULL, '2026-04-22', 1, 1),
+(45, '0987786678', '$2a$08$JPnR3oS3vQ9zxoYUDgGei.85SxqAUdOOXgGw.34afaVoFccOo0knm', 'abc', NULL, NULL, NULL, NULL, '0987786678', NULL, '2026-05-11', 1, 1),
+(46, '0987123789', '$2a$08$w8Vaj.ZBfGF4Ic.zweEXtOngFPRfPh0hyxxvz/q5UUSgW31ctCCmG', 'van dung', NULL, NULL, NULL, NULL, '0987123789', NULL, '2026-05-11', 1, 1);
 
 --
 -- Bẫy `users`
@@ -2149,7 +2217,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `view_count_cart`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_count_cart`  AS SELECT `customers`.`customer_id` AS `customer_id`, `users`.`user_id` AS `user_id`, count(`carts`.`product_variant_id`) AS `count_cart` FROM ((`users` left join `customers` on(`users`.`user_id` = `customers`.`user_id`)) left join `carts` on(`carts`.`customer_id` = `customers`.`customer_id`)) GROUP BY `customers`.`customer_id` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_count_cart`  AS SELECT `customers`.`customer_id` AS `customer_id`, `users`.`user_id` AS `user_id`, count(`carts`.`product_variant_id`) AS `count_cart` FROM ((`users` left join `customers` on(`users`.`user_id` = `customers`.`customer_id`)) left join `carts` on(`carts`.`customer_id` = `customers`.`customer_id`)) GROUP BY `customers`.`customer_id` ;
 
 -- --------------------------------------------------------
 
@@ -2457,7 +2525,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT cho bảng `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT cho bảng `discounts`
@@ -2493,7 +2561,7 @@ ALTER TABLE `notification_types`
 -- AUTO_INCREMENT cho bảng `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
 
 --
 -- AUTO_INCREMENT cho bảng `paying_methods`
@@ -2505,7 +2573,7 @@ ALTER TABLE `paying_methods`
 -- AUTO_INCREMENT cho bảng `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT cho bảng `product_details`
@@ -2517,13 +2585,13 @@ ALTER TABLE `product_details`
 -- AUTO_INCREMENT cho bảng `product_imgs`
 --
 ALTER TABLE `product_imgs`
-  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=293;
+  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=295;
 
 --
 -- AUTO_INCREMENT cho bảng `product_variants`
 --
 ALTER TABLE `product_variants`
-  MODIFY `product_variant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+  MODIFY `product_variant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
 
 --
 -- AUTO_INCREMENT cho bảng `staffs`
@@ -2541,7 +2609,7 @@ ALTER TABLE `suppliers`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- Các ràng buộc cho các bảng đã đổ

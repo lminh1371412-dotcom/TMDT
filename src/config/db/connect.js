@@ -24,7 +24,15 @@ db.connect(function (err) {
         console.error('Database connection failed:', err.message);
         // Không throw err để tránh app crash liên tục
     } else {
-        console.log('You are already connected to the database')
+        console.log('You are already connected to the database');
+        // Disable ONLY_FULL_GROUP_BY for this session to fix ER_WRONG_FIELD_WITH_GROUP errors
+        db.query("SET SESSION sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))", (err) => {
+            if (err) {
+                console.error('Failed to disable ONLY_FULL_GROUP_BY:', err.message);
+            } else {
+                console.log('Successfully disabled ONLY_FULL_GROUP_BY session mode.');
+            }
+        });
     }
 })
 
