@@ -14,3 +14,4 @@ db.query(sql, (err, result) => {
     }
     process.exit();
 });
+//Ok
