@@ -162,7 +162,7 @@ let cartData = localStorage.getItem('formDataArray')
 
 let cartDataString = JSON.parse(cartData)
 
-if (cartDataString.length) {
+if (cartDataString && cartDataString.length) {
     let orderProductContent = document.querySelector('.order-product__content')
 
     cartDataString.forEach(product => {
@@ -289,6 +289,7 @@ const fetchOrderPost = function () {
                 window.alert('Vui lòng thử lại sau')
             } else if (back.status === 'success') {
                 window.location.href = `/order/payment?paying_method_id=${back.paying_method_id}&order_id=${back.order_id}`
+            }
         })
 }
 
