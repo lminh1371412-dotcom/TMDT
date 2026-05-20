@@ -37,5 +37,11 @@ document.addEventListener("DOMContentLoaded", function () {
 		});
 	}
 
-	// Thêm xử lý sự kiện khi nhấn nút Trở lại trang chủ
+	// Thêm xử lý sự kiện khi nhấn nút Thanh toán sau (Trở lại trang chủ/lịch sử mua hàng)
+	const btnHomePage = document.getElementById("btn-home-page");
+	if (btnHomePage) {
+		btnHomePage.addEventListener("click", function () {
+			window.location.href = "/account/purchase";
+		});
+	}
 });    
