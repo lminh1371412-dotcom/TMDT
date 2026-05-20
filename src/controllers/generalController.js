@@ -79,5 +79,5 @@ generalController.checkCart = async (req, res) => {
     }
 }
 
-
+// Thêm comment này để trigger deploy trên Railway
 module.exports = generalController

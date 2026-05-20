@@ -9,3 +9,4 @@ db.query("SELECT * FROM orders ORDER BY order_id DESC LIMIT 5", (err, result) =>
     }
     process.exit();
 });
+
