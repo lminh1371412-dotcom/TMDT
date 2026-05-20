@@ -95,7 +95,7 @@ general.toHHMM = function (datetime) {
 
     return (hour + ':' + minute)
 }
-
+// Hàm xử lý tiền tệ
 general.toCurrency = function (money) {
     if (money === null || money === undefined) money = 0;
     let currency = Number(money).toFixed(0).replace(/./g, function (c, i, a) {
